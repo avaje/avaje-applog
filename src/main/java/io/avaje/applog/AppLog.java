@@ -54,6 +54,9 @@ public class AppLog {
     return provider.getLogger(name, bundle);
   }
 
+  /**
+   * The default implementation that just uses System.getLogger().
+   */
   private static final class DefaultProvider implements Provider {
 
     @Override
