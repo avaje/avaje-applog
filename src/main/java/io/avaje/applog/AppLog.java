@@ -8,6 +8,15 @@ import java.util.ServiceLoader;
  * <p>
  * Defaults to using JDK {@link System#getLogger(String)} but allows applications
  * to provide an alternative System.Logger implementation.
+ * <p>
+ * Applications wanting control over the System.Logger implementation can firstly
+ * provide a {@code System.LoggerFinder} and have that loaded via ServiceLoader.
+ * This might not be possible for applications for example don't have a dedicated JVM.
+ * <p>
+ * Applications that can't use {@code System.LoggerFinder} can instead use
+ * {@link AppLog.Provider} to provide System.Logger implementations. The reason
+ * to use AppLog is that it provides this 1 extra level of indirection that applications
+ * can use to control the System.Logger implementations.
  */
 public class AppLog {
 
@@ -59,7 +68,13 @@ public class AppLog {
   }
 
   /**
-   * Provide System.Logger implementations that otherwise default to {@link System#getLogger(String)}.
+   * Provide System.Logger implementations that would otherwise default to {@link System#getLogger(String)}.
+   * <p>
+   * Create an implementation of Provider and declare that to be service loaded by AppLog. We do this either
+   * via module-info provides clause or via {@code META-INF/services/io.avaje.applog.AppLog$Provider} (or both).
+   * <p>
+   * Note that the {@code io.avaje:avaje-applog-slf4j} dependency provides an adapter for {@code slf4j-api}.
+   * We can add that to our classpath/module-path and System.Logger is implemented using slf4j-api.
    */
   public interface Provider {
 
