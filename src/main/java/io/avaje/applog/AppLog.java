@@ -26,7 +26,7 @@ import java.util.ServiceLoader;
  * to use AppLog is that it provides this 1 extra level of indirection that applications
  * can use to control the System.Logger implementations.
  */
-public class AppLog {
+public final class AppLog {
 
   private static final Provider provider = ServiceLoader.load(Provider.class)
     .findFirst()
@@ -72,7 +72,7 @@ public class AppLog {
    *  ResourceBundle bundle = ResourceBundle.getBundle("io.bazz.bar");
    *  System.Logger logger = AppLog.get("io.bazz.Foo", bundle);
    *
-   *  logger.log(Level.WARNING, "key0", "world");
+   *  logger.log(Level.WARNING, "HELLO_KEY", "world");
    *
    * }</pre>
    *
@@ -106,7 +106,7 @@ public class AppLog {
    * via module-info provides clause or via {@code META-INF/services/io.avaje.applog.AppLog$Provider} (or both).
    * <p>
    * Note that the {@code io.avaje:avaje-applog-slf4j} dependency provides an adapter for {@code slf4j-api}.
-   * We can add that to our classpath/module-path and System.Logger is implemented using slf4j-api.
+   * We can add that to our classpath/module-path and then System.Logger is implemented using slf4j-api.
    */
   public interface Provider {
 
