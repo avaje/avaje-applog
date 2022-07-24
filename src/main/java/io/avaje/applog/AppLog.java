@@ -8,7 +8,7 @@ import java.util.ServiceLoader;
  *
  * <pre>{@code
  *
- *  System.Logger logger = AppLog.get("org.foo.Bar");
+ *  System.Logger logger = AppLog.getLogger("org.foo.Bar");
  *  logger.log(Level.INFO, "Hello {0}", "world");
  *
  * }</pre>
@@ -36,7 +36,7 @@ public final class AppLog {
    * Return the logger for the given class name.
    * <pre>{@code
    *
-   *  System.Logger logger = AppLog.get(Foo.class);
+   *  System.Logger logger = AppLog.getLogger(Foo.class);
    *  logger.log(Level.INFO, "Hello {0}", "world");
    *
    * }</pre>
@@ -44,7 +44,7 @@ public final class AppLog {
    * @param cls The logger name provided by the class name.
    * @return The logger to use
    */
-  public static System.Logger get(Class<?> cls) {
+  public static System.Logger getLogger(Class<?> cls) {
     return provider.getLogger(cls.getName());
   }
 
@@ -52,7 +52,7 @@ public final class AppLog {
    * Return the logger for the given name.
    * <pre>{@code
    *
-   *  System.Logger logger = AppLog.get("org.foo.Bar");
+   *  System.Logger logger = AppLog.getLogger("org.foo.Bar");
    *  logger.log(Level.INFO, "Hello {0}", "world");
    *
    * }</pre>
@@ -60,7 +60,7 @@ public final class AppLog {
    * @param name The logger name
    * @return The logger to use
    */
-  public static System.Logger get(String name) {
+  public static System.Logger getLogger(String name) {
     return provider.getLogger(name);
   }
 
@@ -70,7 +70,7 @@ public final class AppLog {
    * <pre>{@code
    *
    *  ResourceBundle bundle = ResourceBundle.getBundle("io.bazz.bar");
-   *  System.Logger logger = AppLog.get("io.bazz.Foo", bundle);
+   *  System.Logger logger = AppLog.getLogger("io.bazz.Foo", bundle);
    *
    *  logger.log(Level.WARNING, "HELLO_KEY", "world");
    *
@@ -79,7 +79,7 @@ public final class AppLog {
    * @param name The logger name
    * @return The logger to use
    */
-  public static System.Logger get(String name, ResourceBundle bundle) {
+  public static System.Logger getLogger(String name, ResourceBundle bundle) {
     return provider.getLogger(name, bundle);
   }
 

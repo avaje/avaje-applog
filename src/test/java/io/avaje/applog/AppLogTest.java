@@ -14,7 +14,7 @@ class AppLogTest {
 
   @Test
   void getByName() {
-    System.Logger logger = AppLog.get("my.foo");
+    System.Logger logger = AppLog.getLogger("my.foo");
     assertThat(logger.getName()).isEqualTo("my.foo");
 
     logger.log(Level.INFO, "Hello {0}", "world");
@@ -29,13 +29,13 @@ class AppLogTest {
 
   @Test
   void getByClass() {
-    System.Logger logger = AppLog.get(AppLog.class);
+    System.Logger logger = AppLog.getLogger(AppLog.class);
     assertThat(logger.getName()).isEqualTo("io.avaje.applog.AppLog");
   }
 
   @Test
   void getByNestedClass() {
-    System.Logger logger = AppLog.get(AppLog.Provider.class);
+    System.Logger logger = AppLog.getLogger(AppLog.Provider.class);
     assertThat(logger.getName()).isEqualTo("io.avaje.applog.AppLog$Provider");
   }
 
@@ -43,7 +43,7 @@ class AppLogTest {
   void getWithResourceBundle() {
 
     ResourceBundle loggerBundle = ResourceBundle.getBundle("io.bazz.bar");
-    System.Logger logger = AppLog.get("my.foo", loggerBundle);
+    System.Logger logger = AppLog.getLogger("my.foo", loggerBundle);
     assertThat(logger.getName()).isEqualTo("my.foo");
 
     // use loggers bundle

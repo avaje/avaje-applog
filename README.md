@@ -14,14 +14,14 @@ Application and library use of Java `System.Logger` logging facade.
 
 ### How to use
 
-Use `AppLog.get()` rather than `System.getLogger()` to obtain `System.Logger` implementations.
+Use `AppLog.getLogger()` rather than `System.getLogger()` to obtain `System.Logger` implementations.
 
 ```java
-System.Logger logger = AppLog.get("org.foo.Bar");
+System.Logger logger = AppLog.getLogger("org.foo.Bar");
 
 ```
 
-Using `AppLog.get()` rather than using `System.getLogger()` directly gives applications an extra
+Using `AppLog.getLogger()` rather than using `System.getLogger()` directly gives applications an extra
 option for controlling the `System.Logger` implementation. Typically, this is useful in the
 case where application does not have a dedicated JVM where service loading `System.LoggerFinder`
 is not sufficient.
@@ -48,7 +48,7 @@ implementations.
 ### SLF4J-API - avaje-applog-slf4j
 
 We can add `avaje-applog-slf4j` as a dependency such that System.Logger implementations
-provided by `AppLog.get()` are slf4j-api Logger.
+provided by `AppLog.getLogger()` are slf4j-api Logger.
 
 ```xml
 <dependency>

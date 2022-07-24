@@ -13,19 +13,19 @@ class NoCaptureTest {
 
   @Test
   void getByName() {
-    System.Logger logger = AppLog.get("my.foo");
+    System.Logger logger = AppLog.getLogger("my.foo");
     logger.log(Level.INFO, "Name Hello {0}", "world");
   }
 
   @Test
   void getByClass() {
-    System.Logger logger = AppLog.get(AppLog.class);
+    System.Logger logger = AppLog.getLogger(AppLog.class);
     logger.log(Level.INFO, "Class Hello {0}", "world");
   }
 
   @Test
   void getByNestedClass() {
-    System.Logger logger = AppLog.get(AppLog.Provider.class);
+    System.Logger logger = AppLog.getLogger(AppLog.Provider.class);
     logger.log(Level.INFO, "nested Hello {0}", "world");
   }
 
@@ -33,7 +33,7 @@ class NoCaptureTest {
   void getWithResourceBundle() {
 
     ResourceBundle loggerBundle = ResourceBundle.getBundle("io.bazz.bar");
-    System.Logger logger = AppLog.get("my.foo", loggerBundle);
+    System.Logger logger = AppLog.getLogger("my.foo", loggerBundle);
 
     // use loggers bundle
     logger.log(Level.WARNING, "key0", "logger resource bunde");
