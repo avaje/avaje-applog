@@ -5,6 +5,14 @@ import java.util.ServiceLoader;
 
 /**
  * Use of System.Logger for Application logging.
+ *
+ * <pre>{@code
+ *
+ *  System.Logger logger = AppLog.get("org.foo.Bar");
+ *  logger.log(Level.INFO, "Hello {0}", "world");
+ *
+ * }</pre>
+ *
  * <p>
  * Defaults to using JDK {@link System#getLogger(String)} but allows applications
  * to provide an alternative System.Logger implementation.
@@ -26,6 +34,12 @@ public class AppLog {
 
   /**
    * Return the logger for the given class name.
+   * <pre>{@code
+   *
+   *  System.Logger logger = AppLog.get(Foo.class);
+   *  logger.log(Level.INFO, "Hello {0}", "world");
+   *
+   * }</pre>
    *
    * @param cls The logger name provided by the class name.
    * @return The logger to use
@@ -36,6 +50,12 @@ public class AppLog {
 
   /**
    * Return the logger for the given name.
+   * <pre>{@code
+   *
+   *  System.Logger logger = AppLog.get("org.foo.Bar");
+   *  logger.log(Level.INFO, "Hello {0}", "world");
+   *
+   * }</pre>
    *
    * @param name The logger name
    * @return The logger to use
@@ -46,6 +66,15 @@ public class AppLog {
 
   /**
    * Return the logger for the given name and resource bundle.
+   *
+   * <pre>{@code
+   *
+   *  ResourceBundle bundle = ResourceBundle.getBundle("io.bazz.bar");
+   *  System.Logger logger = AppLog.get("io.bazz.Foo", bundle);
+   *
+   *  logger.log(Level.WARNING, "key0", "world");
+   *
+   * }</pre>
    *
    * @param name The logger name
    * @return The logger to use
