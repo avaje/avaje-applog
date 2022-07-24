@@ -8,7 +8,7 @@ import java.util.ServiceLoader;
  *
  * <pre>{@code
  *
- *  System.Logger logger = AppLog.getLogger("org.foo.Bar");
+ *  System.Logger logger = AppLog.getLogger("org.foo");
  *  logger.log(Level.INFO, "Hello {0}", "world");
  *
  * }</pre>
@@ -52,7 +52,7 @@ public final class AppLog {
    * Return the logger for the given name.
    * <pre>{@code
    *
-   *  System.Logger logger = AppLog.getLogger("org.foo.Bar");
+   *  System.Logger logger = AppLog.getLogger("org.foo");
    *  logger.log(Level.INFO, "Hello {0}", "world");
    *
    * }</pre>

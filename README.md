@@ -17,8 +17,9 @@ Application and library use of Java `System.Logger` logging facade.
 Use `AppLog.getLogger()` rather than `System.getLogger()` to obtain `System.Logger` implementations.
 
 ```java
-System.Logger logger = AppLog.getLogger("org.foo.Bar");
+System.Logger logger = AppLog.getLogger("org.foo");
 
+logger.log(Level.INFO, "Hello {0}", "world");
 ```
 
 Using `AppLog.getLogger()` rather than using `System.getLogger()` directly gives applications an extra
