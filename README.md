@@ -72,13 +72,13 @@ and the parameters can use formats like <code>{0,number,#.##} {0,time} {0,date}<
 See {@link java.text.MessageFormat} for more details.
 
 
-#### Number format<
+#### Number format
 
 By default, numbers are formatted based on locale so {@code 8080 } can be formatted as {@code 8,080}.
 We often prefer to format integers like <code> {0,number,#} </code> rather than <code> {0} </code>.
 ```java
-   // use {1,number,integer} to format the int port so we get 8080 rather than 8,080
-   logger.log(Level.INFO, "started with host {0} port {1,number,integer} ", host, port);
+// use {1,number,integer} to format the int port so we get 8080 rather than 8,080
+logger.log(Level.INFO, "started with host {0} port {1,number,integer} ", host, port);
 ```
 
 
@@ -89,14 +89,14 @@ parameter is a Throwable and if so extract it and trim the parameters. System.Lo
 instead we need to be explicit when logging Throwable and formatting the message if needed.
 
 ```java
-  System.Logger logger = AppLog.getLogger("org.foo");
+System.Logger logger = AppLog.getLogger("org.foo");
 
-  // using varargs parameters all ok with no Throwable
-  logger.log(Level.INFO, "My {0} Hello {1} message", "silly", "world");
-  try {
-      someMethodThatThrows();
-  } catch (Throwable e) {
-    // need to format message here and explicitly pass throwable
-    logger.log(Level.ERROR, MessageFormat.format("Error using {0} and {1}", "MyParam0", "OtherParam1"), e);
-  }
+// using varargs parameters all ok with no Throwable
+logger.log(Level.INFO, "My {0} Hello {1} message", "silly", "world");
+try {
+    someMethodThatThrows();
+} catch (Throwable e) {
+  // need to format message here and explicitly pass throwable
+  logger.log(Level.ERROR, MessageFormat.format("Error using {0} and {1}", "MyParam0", "OtherParam1"), e);
+}
 ```
