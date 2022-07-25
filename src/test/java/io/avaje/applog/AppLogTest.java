@@ -4,6 +4,7 @@ package io.avaje.applog;
 import org.junit.jupiter.api.Test;
 
 import java.lang.System.Logger.Level;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,5 +64,24 @@ class AppLogTest {
     logger.log(Level.WARNING, baxBundle, "key0", "world");
     assertThat(logCapture.lastRecord.getResourceBundle()).isSameAs(baxBundle);
     assertThat(logCapture.lastRecord.getResourceBundleName()).isEqualTo("io.bazz.bax");
+  }
+
+  @Test
+  void withError() {
+    System.Logger logger = AppLog.getLogger("my.foo");
+    logger.log(Level.INFO, "Name Hello {0}", "world");
+    try {
+      methodThatThrows();
+    } catch (Throwable e) {
+      logger.log(Level.ERROR, MessageFormat.format("This error {0}", "MyParam"), e);
+
+      assertThat(logCapture.lastRecord.getMessage()).isEqualTo("This error MyParam");
+      assertThat(logCapture.lastRecord.getParameters()).isNull();
+      assertThat(logCapture.lastRecord.getThrown().getMessage()).isEqualTo("I like to throw");
+    }
+  }
+
+  private void methodThatThrows() {
+    throw new RuntimeException("I like to throw");
   }
 }

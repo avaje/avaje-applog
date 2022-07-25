@@ -4,6 +4,7 @@ package io.avaje.applog;
 import org.junit.jupiter.api.Test;
 
 import java.lang.System.Logger.Level;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
@@ -41,5 +42,20 @@ class NoCaptureTest {
     ResourceBundle baxBundle = ResourceBundle.getBundle("io.bazz.bax");
     // use explicitly supplied bundle
     logger.log(Level.WARNING, baxBundle, "key0", "method resource bundle");
+  }
+
+  @Test
+  void withError() {
+    System.Logger logger = AppLog.getLogger("my.foo");
+    logger.log(Level.INFO, "Name Hello {0}", "world");
+    try {
+      methodThatThrows();
+    } catch (Throwable e) {
+      logger.log(Level.ERROR, MessageFormat.format("This error {0}", "MyParam"), e);
+    }
+  }
+
+  private void methodThatThrows() {
+    throw new RuntimeException("I like to throw");
   }
 }
