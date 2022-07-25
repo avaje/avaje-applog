@@ -82,19 +82,9 @@ public final class AppLog {
     .orElseGet(DefaultProvider::new);
 
   /**
-   * Return the logger for the given class name.
-   * <pre>{@code
-   *
-   *  System.Logger logger = AppLog.getLogger(Foo.class);
-   *  logger.log(Level.INFO, "Hello {0}", "world");
-   *
-   * }</pre>
-   *
-   * @param cls The logger name provided by the class name.
-   * @return The logger to use
+   * Not accessible.
    */
-  public static System.Logger getLogger(Class<?> cls) {
-    return provider.getLogger(cls.getName());
+  private AppLog() {
   }
 
   /**
@@ -111,6 +101,22 @@ public final class AppLog {
    */
   public static System.Logger getLogger(String name) {
     return provider.getLogger(name);
+  }
+
+  /**
+   * Return the logger for the given class name.
+   * <pre>{@code
+   *
+   *  System.Logger logger = AppLog.getLogger(Foo.class);
+   *  logger.log(Level.INFO, "Hello {0}", "world");
+   *
+   * }</pre>
+   *
+   * @param cls The logger name provided by the class name.
+   * @return The logger to use
+   */
+  public static System.Logger getLogger(Class<?> cls) {
+    return provider.getLogger(cls.getName());
   }
 
   /**
