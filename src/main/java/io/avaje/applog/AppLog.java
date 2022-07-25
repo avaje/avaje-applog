@@ -21,9 +21,9 @@ import java.util.ServiceLoader;
  * This might not be possible for applications for example don't have a dedicated JVM.
  * <p>
  * Applications that can't use {@code System.LoggerFinder} can instead use
- * {@link AppLog.Provider} to provide System.Logger implementations. The reason
- * to use AppLog is that it provides this 1 extra level of indirection that applications
- * can use to control the System.Logger implementations.
+ * {@link AppLog.Provider} to provide System.Logger implementations returned by AppLog.
+ * The reason to use AppLog is that it provides this 1 extra level of indirection that
+ * gives applications control over the System.Logger implementation returned by AppLog.
  *
  *
  * <hr/>
@@ -70,6 +70,10 @@ import java.util.ServiceLoader;
  *   }
  * }</pre>
  *
+ *
+ * <h4>No slf4j MDC or Markers</h3>
+ * <p>
+ * System.Logger API has no equivalent to slf4j MDC or Markers.
  */
 public final class AppLog {
 

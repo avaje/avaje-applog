@@ -14,7 +14,7 @@ Application and library use of Java `System.Logger` logging facade.
 
 ### How to use
 
-Use `AppLog.getLogger()` rather than `System.getLogger()` to obtain `System.Logger` implementations.
+Use `AppLog.getLogger()` rather than `System.getLogger()` to obtain `System.Logger`.
 
 ```java
 System.Logger logger = AppLog.getLogger("org.foo");
@@ -22,16 +22,16 @@ System.Logger logger = AppLog.getLogger("org.foo");
 logger.log(Level.INFO, "Hello {0}", "world");
 ```
 
-Using `AppLog.getLogger()` rather than using `System.getLogger()` directly gives applications an extra
-option for controlling the `System.Logger` implementation. Typically, this is useful in the
-case where application does not have a dedicated JVM where service loading `System.LoggerFinder`
-is not sufficient.
+Using `AppLog.getLogger()` rather than using `System.getLogger()` gives applications an extra
+option for controlling the `System.Logger` implementation returned by AppLog. Typically, this
+is useful in the case where application does not have a dedicated JVM where service loading
+`System.LoggerFinder` is not sufficient. One such environment currently is AWS Lambda Java runtime.
 
 
 ### Defaults to System.getLogger()
 
 Defaults to using JDK `System.getLogger()` but allows applications to provide an alternative
-System.Logger implementation by service loading a `AppLog.Provider`.
+System.Logger implementation returned by AppLog.getLogger() by service loading a `AppLog.Provider`.
 
 
 ### Custom System.Logger implementation
@@ -40,10 +40,10 @@ Applications wanting control over the System.Logger implementation can firstly p
 a `System.LoggerFinder` and have that loaded via ServiceLoader. This might not be possible
 for applications that for example don't have a dedicated JVM.
 
-Applications that can't use `System.LoggerFinder` can instead use`AppLog.Provider` to
-provide System.Logger implementations. The reason to use AppLog is that it provides this
-1 extra level of indirection that applications can use to control the System.Logger
-implementations.
+Applications that can't use `System.LoggerFinder` can instead use `AppLog.Provider` to
+control the System.Logger implementations returned by AppLog. The reason to use AppLog is
+that it provides this 1 extra level of indirection that applications can use to control
+the System.Logger implementation returned by AppLog.
 
 
 ### SLF4J-API - avaje-applog-slf4j
@@ -100,3 +100,5 @@ try {
   logger.log(Level.ERROR, MessageFormat.format("Error using {0} and {1}", "MyParam0", "OtherParam1"), e);
 }
 ```
+
+#### No slf4j `MDC`, No slf4j `Markers`, No fluid API
