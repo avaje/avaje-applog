@@ -5,11 +5,10 @@ import java.util.ServiceLoader;
 
 /**
  * Use of System.Logger for Application and Library logging.
- *
  * <pre>{@code
  *
- *  System.Logger logger = AppLog.getLogger("org.foo");
- *  logger.log(Level.INFO, "Hello {0}", "world");
+ *   System.Logger logger = AppLog.getLogger("org.foo");
+ *   logger.log(Level.INFO, "Hello {0}", "world");
  *
  * }</pre>
  *
@@ -27,21 +26,22 @@ import java.util.ServiceLoader;
  * can use to control the System.Logger implementations.
  *
  *
+ * <hr/>
  *
  * <h2>Main differences to slf4j-api</h2>
  *
  * <h4>MessageFormat placeholders</h3>
  * <p>
- * System.Logger uses {@link java.text.MessageFormat} with placeholders like <code> {0}, {1}, {2} ... </code>
- * rather than slf4j which uses <code> {} </code>. This means parameters can be referenced multiple times
+ * System.Logger uses {@link java.text.MessageFormat} with placeholders like <code>{0}, {1}, {2} ...</code>
+ * rather than slf4j which uses <code>{}</code>. This means parameters can be referenced multiple times
  * and the parameters can use formats like <code>{0,number,#.##} {0,time} {0,date}</code> etc.
  * See {@link java.text.MessageFormat} for more details.
  *
- *
- * <h4>Number format</h3>
+ * <h4>Default number format</h3>
  * <p>
  * By default, numbers are formatted based on locale so {@code 8080 } can be formatted as {@code 8,080}.
- * We often prefer to format integers like <code> {0,number,#} </code> rather than <code> {0} </code>.
+ * For this reason, we often prefer to format integers like <code>{0,number,#}</code> rather than
+ * <code>{0}</code>.
  *
  * <pre>{@code
  *
@@ -56,8 +56,6 @@ import java.util.ServiceLoader;
  * When logging a message with vararg parameters, slf4j will automatically try to detect if the last
  * parameter is a Throwable and if so extract it and trim the parameters. System.Logger does not do this,
  * instead we need to be explicit when logging Throwable and formatting the message if needed.
- *
- *
  * <pre>{@code
  *
  *   System.Logger logger = AppLog.getLogger("org.foo");
@@ -113,7 +111,6 @@ public final class AppLog {
 
   /**
    * Return the logger for the given name and resource bundle.
-   *
    * <pre>{@code
    *
    *  ResourceBundle bundle = ResourceBundle.getBundle("io.bazz.bar");
