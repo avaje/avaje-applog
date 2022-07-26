@@ -19,6 +19,13 @@ Application and library use of Java `System.Logger` logging facade.
 
 ### How to use
 
+If using module-path add a requires clause into module-info:
+
+```java
+requires io.avaje.applog;
+```
+
+
 Use `AppLog.getLogger()` rather than `System.getLogger()` to obtain `System.Logger`.
 
 ```java
@@ -52,6 +59,8 @@ the System.Logger implementation returned by AppLog.
 
 
 ### SLF4J-API - avaje-applog-slf4j
+
+See [avaje-applog-slf4j](https://github.com/avaje/avaje-applog-slf4j)
 
 We can add `avaje-applog-slf4j` as a dependency such that System.Logger implementations
 provided by `AppLog.getLogger()` are slf4j-api Logger.
