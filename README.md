@@ -1,6 +1,7 @@
 [![Build](https://github.com/avaje/avaje-applog/actions/workflows/build.yml/badge.svg)](https://github.com/avaje/avaje-applog/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.avaje/avaje-applog.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/io.avaje/avaje-applog)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/avaje/avaje-applog/blob/master/LICENSE)
+[![JDK EA](https://github.com/avaje/avaje-applog/actions/workflows/jdk-ea.yml/badge.svg)](https://github.com/avaje/avaje-applog/actions/workflows/jdk-ea.yml)
 
 # avaje-applog
 
