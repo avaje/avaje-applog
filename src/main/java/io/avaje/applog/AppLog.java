@@ -1,6 +1,8 @@
 package io.avaje.applog;
 
+import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
 /**
@@ -77,14 +79,22 @@ import java.util.ServiceLoader;
  */
 public final class AppLog {
 
-  private static final Provider provider = ServiceLoader.load(Provider.class)
-    .findFirst()
-    .orElseGet(DefaultProvider::new);
+  private static final Provider provider = loadProvider();
 
-  /**
-   * Not accessible.
-   */
-  private AppLog() {
+  private AppLog() {}
+
+  private static Provider loadProvider() {
+    try {
+      return ServiceLoader.load(Provider.class).findFirst().orElseGet(DefaultProvider::new);
+    } catch (ServiceConfigurationError e) {
+      var prov = new DefaultProvider();
+      getLogger(AppLog.class.getCanonicalName())
+          .log(
+              Level.ERROR,
+              "Failed to Service Load AppLog Provider, using System.Logger implementation",
+              e);
+      return prov;
+    }
   }
 
   /**
