@@ -26,8 +26,6 @@ import java.util.ServiceLoader;
  * {@link AppLog.Provider} to provide System.Logger implementations returned by AppLog.
  * The reason to use AppLog is that it provides this 1 extra level of indirection that
  * gives applications control over the System.Logger implementation returned by AppLog.
- *
- *
  * <hr/>
  *
  * <h2>Main differences to slf4j-api</h2>
@@ -87,13 +85,9 @@ public final class AppLog {
     try {
       return ServiceLoader.load(Provider.class).findFirst().orElseGet(DefaultProvider::new);
     } catch (ServiceConfigurationError e) {
-      var prov = new DefaultProvider();
       getLogger(AppLog.class.getCanonicalName())
-          .log(
-              Level.ERROR,
-              "Failed to Service Load AppLog Provider, using System.Logger implementation",
-              e);
-      return prov;
+          .log(Level.ERROR, "Failed to Service Load AppLog Provider, using System.Logger implementation", e);
+      return new DefaultProvider();
     }
   }
 
