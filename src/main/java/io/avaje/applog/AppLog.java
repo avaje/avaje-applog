@@ -1,6 +1,8 @@
 package io.avaje.applog;
 
+import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
 /**
@@ -24,8 +26,6 @@ import java.util.ServiceLoader;
  * {@link AppLog.Provider} to provide System.Logger implementations returned by AppLog.
  * The reason to use AppLog is that it provides this 1 extra level of indirection that
  * gives applications control over the System.Logger implementation returned by AppLog.
- *
- *
  * <hr/>
  *
  * <h2>Main differences to slf4j-api</h2>
@@ -77,14 +77,18 @@ import java.util.ServiceLoader;
  */
 public final class AppLog {
 
-  private static final Provider provider = ServiceLoader.load(Provider.class)
-    .findFirst()
-    .orElseGet(DefaultProvider::new);
+  private static final Provider provider = loadProvider();
 
-  /**
-   * Not accessible.
-   */
-  private AppLog() {
+  private AppLog() {}
+
+  private static Provider loadProvider() {
+    try {
+      return ServiceLoader.load(Provider.class).findFirst().orElseGet(DefaultProvider::new);
+    } catch (ServiceConfigurationError e) {
+      getLogger(AppLog.class.getCanonicalName())
+          .log(Level.ERROR, "Failed to Service Load AppLog Provider, using System.Logger implementation", e);
+      return new DefaultProvider();
+    }
   }
 
   /**

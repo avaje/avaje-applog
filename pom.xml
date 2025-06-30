@@ -18,6 +18,7 @@
 
   <properties>
     <surefire.useModulePath>false</surefire.useModulePath>
+    <project.build.outputTimestamp>2025-02-26T05:43:52Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
@@ -27,7 +28,6 @@
       <version>1.1</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
 </project>

@@ -1,4 +1,11 @@
 .idea/
 *.iml
 target/
-
+build/
+.gradle
+*.prefs
+*.class*
+*.factorypath
+*.project
+*.processors
+*/bin/
