@@ -85,9 +85,10 @@ public final class AppLog {
     try {
       return ServiceLoader.load(Provider.class).findFirst().orElseGet(DefaultProvider::new);
     } catch (ServiceConfigurationError e) {
-      getLogger(AppLog.class.getCanonicalName())
+      var prov = new DefaultProvider();
+      prov.getLogger(AppLog.class.getCanonicalName())
           .log(Level.ERROR, "Failed to Service Load AppLog Provider, using System.Logger implementation", e);
-      return new DefaultProvider();
+      return prov;
     }
   }
 
