@@ -13,7 +13,7 @@ Application and library use of Java `System.Logger` logging facade.
 <dependency>
   <groupId>io.avaje</groupId>
   <artifactId>avaje-applog</artifactId>
-  <version>1.0</version>
+  <version>1.2</version>
 </dependency>
 ```
 
